@@ -1,0 +1,19 @@
+1 sudo nano /tmp/file1
+2 ls /home
+3 grep "test" /tmp/file1
+4 sudo nano /tmp/file1
+5 sudo nano /tmp/file1
+6 sudo rm /tmp/file1
+
+
+##To get the output as 
+
+      3 sudo nano /tmp/file1
+      1 sudo rm /tmp/file1
+
+
+##Use the below command
+###grep sudo history.txt | cut -f2- -d ' '|uniq -c
+1)first we filter the commands only with sudo
+2)remove the numerical fields at the beginning with cut
+3)print the unique occurrences along with how many times they occur(uniq -c)
