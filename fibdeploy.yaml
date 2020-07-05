@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: fibonaci
+  name: fibonaci
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fibonaci
+  template:
+    metadata:
+      labels:
+        app: fibonaci
+    spec:
+      containers:
+      - image: anudeepmk/fibflask
+        name: fibflask
+        ports:
+        - containerPort: 5000
