@@ -52,6 +52,62 @@ anudeep@mylocal:~$ curl localhost:5000/fib/aa
 anudeep@mylocal:~$
 ```
 
+If you also have kubernetes installed
+
+```
+anudeep@deeps:~/Documents/FlaskIntro/fibonaci_task$ kubectl create ns fibonaci
+namespace/fibonaci created
+anudeep@deeps:~/Documents/FlaskIntro/fibonaci_task$ kubectl apply -f fibdeploy.yaml --namespace=fibonaci
+deployment.apps/fibonaci created
+anudeep@deeps:~/Documents/FlaskIntro/fibonaci_task$ kubectl get deploy -n fibonaci
+NAME       READY   UP-TO-DATE   AVAILABLE   AGE
+fibonaci   1/1     1            1           60s
+anudeep@deeps:~/Documents/FlaskIntro/fibonaci_task$ kubectl apply -f fibSvc.yaml --namespace=fibonaci 
+service/fibonaci created
+anudeep@deeps:~/Documents/FlaskIntro/fibonaci_task$ kubectl get ep fibonaci -n fibonaci 
+NAME       ENDPOINTS          AGE
+fibonaci   10.1.51.119:5000   26s
+anudeep@deeps:~/Documents/FlaskIntro/fibonaci_task$ kubectl get svc -n fibonaci 
+NAME       TYPE       CLUSTER-IP       EXTERNAL-IP   PORT(S)          AGE
+fibonaci   NodePort   10.152.183.152   <none>        5000:30425/TCP   44s
+anudeep@deeps:~/Documents/FlaskIntro/fibonaci_task$ curl localhost:30425/fib/11
+[
+  [
+    3, 
+    3, 
+    5
+  ], 
+  [
+    2, 
+    2, 
+    2, 
+    5
+  ], 
+  [
+    2, 
+    3, 
+    3, 
+    3
+  ], 
+  [
+    2, 
+    2, 
+    2, 
+    2, 
+    3
+  ]
+]
+anudeep@deeps:~/Documents/FlaskIntro/fibonaci_task$ curl localhost:30425/fib/aa
+{
+  "errorCode": 404, 
+  "message": "Invalid value entered"
+}
+anudeep@deeps:~/Documents/FlaskIntro/fibonaci_task$ 
+
+```
+
+
+
 
 ## Tech stack used
 
